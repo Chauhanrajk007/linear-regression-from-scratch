@@ -1,16 +1,30 @@
 # Linear Regression from Scratch
 
-Built linear regression using gradient descent — no sklearn, no machine learning libraries.
+Trained linear regression using **gradient descent** — written from scratch, **no sklearn**.
+
+## Live Results
+
+The fit vs the true line, and the cost dropping over epochs (trained in Colab):
+
+![Regression fit](fit.png)
+
+Gradient descent learning the line, animated:
+
+![Gradient descent animation](training.gif)
+
+## Metrics from the run
+
+| Metric | Value |
+|--------|-------|
+| Learned slope | ~1.8 (true: 1.8) |
+| Learned intercept | ~4.0 (true: 4.0) |
+| Notebook | [open it](linear_regression_from_scratch.ipynb) |
 
 ## The Math
 
-**Hypothesis:** `y_pred = w * X + b`
+**Model:** `y_pred = w * X + b`
 
-**Cost function (MSE):**
-
-```
-J = (1/n) * sum((y_pred - y)^2)
-```
+**Cost (MSE):** `J = (1/n) * sum((y_pred - y)^2)`
 
 **Gradients:**
 
@@ -19,42 +33,33 @@ dw = (2/n) * sum(X * (y_pred - y))
 db = (2/n) * sum(y_pred - y)
 ```
 
-**Update rule:**
+**Update rule (gradient descent):**
 
 ```
 w = w - lr * dw
 b = b - lr * db
 ```
 
-We repeat the update for `epochs` iterations until the cost converges.
-
 ## How it works
 
 1. Start with `w = 0`, `b = 0`
 2. Predict with current weights
 3. Compute the error
-4. Take the derivative (gradient) of the cost w.r.t `w` and `b`
-5. Move weights in the direction that reduces the error (gradient descent)
-6. Repeat
+4. Take the gradient of the cost w.r.t `w` and `b`
+5. Nudge the weights in the direction that reduces error
+6. Repeat for `epochs` iterations
 
-## Usage
+## Run it yourself
 
 ```bash
-pip install numpy
+pip install numpy matplotlib
+# option 1: script
 python example.py
-```
-
-## Output
-
-```
-Epoch   0 | w=0.0142 b=0.0040 | MSE=16.2576
-...
-Final weight (slope): 0.5820
-Final bias (intercept): 2.2360
-Predictions: [3. 3. 3. 3. 3.]
+# option 2 (proof): open linear_regression_from_scratch.ipynb in Google Colab and Run All
 ```
 
 ## Files
 
+- `linear_regression_from_scratch.ipynb` — Colab notebook with the full training run (outputs + plots saved)
 - `linear_regression.py` — the model class
-- `example.py` — a runnable example
+- `example.py` — CLI demo
